@@ -11,10 +11,12 @@ You should already have a PostgreSQL database user with a username of 'student' 
 
 First, clone the Git repository to a directory on your local machine. 
 
-Then, navigate (cd) into this directory and run the commands in the following order:
+Then, navigate (```cd```) into this directory and run the commands in the following order:
 
+```
 python create_tables.py
 python etl.py
+```
 
 Python 3.9.13 was used for this project. Prior to running the above scripts, ensure that the psycopg2 and pandas packages are installed within the current environment. 
 
@@ -46,25 +48,31 @@ These are just some example queries that can be run on the database to yield use
 
 1) Which areas in the United States users are most users listening to songs on their app from? 
 
+```
 SELECT location, COUNT(*) as counts
 FROM songplays
 GROUP BY location
 ORDER BY counts DESC
+```
 
 This shows that the top three places where users are listening from are San Francisco, CA (691 songplays), Portland, ME (665 songplays), and Lansing, MI (557 songplays). 
 
 2) Which gender most listens to songs on their app? By joining the fact table songplays with the dimension table users, we can get this information. 
 
+```
 SELECT gender, COUNT(*) FROM
 songplays JOIN users ON songplays.user_id = users.user_id
 GROUP BY gender
+```
 
 This shows that more females (4887) than males (1933) are active.
 
 3) Are most users having a free or paid subscription?
 
+```
 SELECT level, COUNT(level)
 FROM songplays
 GROUP BY level
+```
 
 This shows that there are more paid subscribers (5591) than free subscribers (1229). 
